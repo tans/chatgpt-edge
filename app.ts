@@ -16,7 +16,7 @@ const router = new Router();
 const processChatRequest = async (ctx: any) => {
     const body = await ctx.request.body({ type: "json" }).value;
     console.log(body);
-    const { key, content, prefix } = body;
+    const { key, content, prefix, conversations } = body;
     let data: any = "";
     let res: any = "";
 
@@ -32,11 +32,13 @@ const processChatRequest = async (ctx: any) => {
         const prefixMessage = prefix ? createSystemMessage(prefix) : null;
         const userMessage = { role: "user", content: content };
 
-        const messages: any = [
-            currentTimeMessage,
-            prefixMessage,
-            userMessage,
-        ].filter(Boolean);
+        const messages: any = [currentTimeMessage, prefixMessage].filter(
+            Boolean
+        );
+        if (conversations && conversations.length > 0) {
+            messages.push(...conversations);
+        }
+        messages.push(userMessage);
 
         try {
             const configuration = new Configuration({ apiKey: key });
