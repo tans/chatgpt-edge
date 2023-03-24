@@ -1,18 +1,25 @@
 
 ## 安装运行
-### 安装 Deno
+
+#### 安装 Deno
+
 curl -fsSL https://deno.land/x/install/install.sh | sh
 
-### Run the app
+#### Run the app
+
 deno run --allow-net app.ts --daemon
 
-### 或者通过 cloudflare edge， deno deploy 等边缘计算平台部署。
+http://localhost:8000/chat/api
 
-## POST /chat/api
+#### 或者通过 cloudflare edge， deno deploy 等边缘计算平台部署。
+
+## API 接口
+
+POST /chat/api
 
 Processes chat requests by sending them to the OpenAI GPT-3 API and returning the response.
 
-### Request
+#### Request
 
 - Method: POST
 - URL: `/chat/api`
@@ -27,7 +34,7 @@ Processes chat requests by sending them to the OpenAI GPT-3 API and returning th
   }
   ```
 
-### Response
+#### Response
 
 - Status Code: 200 OK
 - Body:
@@ -37,7 +44,7 @@ Processes chat requests by sending them to the OpenAI GPT-3 API and returning th
   }
   ```
 
-### Example
+#### Example
 
 ```bash
 curl -X POST \
